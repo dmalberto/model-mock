@@ -1,22 +1,19 @@
 import random
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import List
 
 app = FastAPI()
-
 
 class DataFrameRecord(BaseModel):
     Er: float
     Sigma: int
 
-
 class PredictionRequest(BaseModel):
-    dataframe_records: list[DataFrameRecord]
-
+    dataframe_records: List[DataFrameRecord]
 
 class PredictionResponse(BaseModel):
-    predictions: list[float]
-
+    predictions: List[float]
 
 @app.post("/invocations")
 def make_predictions(request: PredictionRequest):
